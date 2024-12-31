@@ -16,17 +16,19 @@ function App() {
       {/* GlobalStyles needs to be sibling, it does not accept any children */}
       <GlobalStyles />
       <StyledApp>
-        <Row type="vertical">
+        <Row>
           <Row type="horizontal">
             <Heading as="h1">The Wild Oasis</Heading>
             <div>
               <Heading as="h2">Check in and out</Heading>
               <Button>Check in</Button>
-              <Button>Check out</Button>
+              <Button size="small" variation="danger">
+                Check out
+              </Button>
             </div>
           </Row>
 
-          <Row type="vertical">
+          <Row>
             <Heading as="h3">Form</Heading>
             <form>
               <Input type="number" placeholder="number of guests" />
