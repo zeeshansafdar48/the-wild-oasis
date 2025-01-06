@@ -29,17 +29,10 @@ const TableHeader = styled.header`
 `;
 
 function CabinTable() {
-  const {
-    error,
-    data: cabins,
-    isLoading
-  } = useQuery({
-    queryKey: ["cabin"],
+  const { data: cabins, isLoading } = useQuery({
+    queryKey: ["cabins"],
     queryFn: getCabins
   });
-  console.log("==> ~ CabinTable ~ error:", error);
-  console.log("==> ~ CabinTable ~ cabins:", cabins);
-  console.log("==> ~ CabinTable ~ isLoading:", isLoading);
 
   if (isLoading) return <Spinner />;
 
