@@ -60,7 +60,6 @@ function CabinRow({ cabin }) {
     onError: (err) => toast.error(err.message)
   });
 
-  console.log("==> ~ CabinRow ~ cabin:", cabin);
   return (
     <TableRow role="row">
       <Img src={image} />
