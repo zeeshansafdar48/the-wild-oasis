@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export function useSettings() {
   return useQuery({
-    queryKey: ["settings"],
+    queryKey: ["setting"],
     queryFn: getSettings,
     onError: (err) => {
       toast.error(err.message);
