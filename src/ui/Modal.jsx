@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { cloneElement, createContext, useContext, useState } from "react";
+import { cloneElement, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 import { useOutsideClick } from "../hooks/useOutsideClick";
+import { ModalContext } from "../context/ModalContext";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -53,8 +54,6 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
-
-const ModalContext = createContext();
 
 function Modal({ children }) {
   const [openName, setOpenName] = useState("");
