@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
 
@@ -36,22 +37,19 @@ const Amount = styled.div`
 
 function BookingRow({
   booking: {
-    id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
     totalPrice,
     status,
     guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
-  },
+    cabins: { name: cabinName }
+  }
 }) {
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
-    "checked-out": "silver",
+    "checked-out": "silver"
   };
 
   return (
@@ -65,10 +63,8 @@ function BookingRow({
 
       <Stacked>
         <span>
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}{" "}
-          &rarr; {numNights} night stay
+          {isToday(new Date(startDate)) ? "Today" : formatDistanceFromNow(startDate)} &rarr;{" "}
+          {numNights} night stay
         </span>
         <span>
           {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
