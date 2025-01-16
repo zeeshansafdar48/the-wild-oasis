@@ -13,12 +13,12 @@ const StyledSelect = styled.select`
   box-shadow: var(--shadow-sm);
 `;
 
-function Select({ options, filteredValue, ...props }) {
+function SortBy({ options, filterValue, ...props }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentValue = searchParams.get("sortBy");
 
   function handleChange(e) {
-    searchParams.set(filteredValue, e.target.value);
+    searchParams.set(filterValue, e.target.value);
     setSearchParams(searchParams);
   }
 
@@ -33,4 +33,4 @@ function Select({ options, filteredValue, ...props }) {
   );
 }
 
-export default Select;
+export default SortBy;

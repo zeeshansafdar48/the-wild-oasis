@@ -10,20 +10,20 @@ function CabinTable() {
   const { isLoading, cabins = [] } = useCabins();
   const [searchParams] = useSearchParams();
 
-  const discountFilteredValue = searchParams.get("discount") || "all";
-  const sortByFilteredValue = searchParams.get("sortBy") || "name-asc";
+  const discountfilterValue = searchParams.get("discount") || "all";
+  const sortByfilterValue = searchParams.get("sortBy") || "name-asc";
 
   let filteredCabins;
 
-  if (discountFilteredValue === "all") filteredCabins = cabins;
-  if (discountFilteredValue === "no-discount")
+  if (discountfilterValue === "all") filteredCabins = cabins;
+  if (discountfilterValue === "no-discount")
     filteredCabins = cabins.filter((cabin) => cabin.discount === 0);
-  if (discountFilteredValue === "with-discount")
+  if (discountfilterValue === "with-discount")
     filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
 
   let sortedCabins = [...filteredCabins];
 
-  const [field, direction] = sortByFilteredValue.split("-");
+  const [field, direction] = sortByfilterValue.split("-");
   const modifier = direction === "asc" ? 1 : -1;
   sortedCabins = sortedCabins.sort((a, b) => a[field] - b[field] * modifier);
 

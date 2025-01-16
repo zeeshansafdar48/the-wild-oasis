@@ -1,12 +1,12 @@
 import TableOperations from "../../ui/TableOperations";
 import Filter from "../../ui/Filter";
-import Select from "../../ui/Select";
+import SortBy from "../../ui/SortBy";
 
 function CabinTableOperations() {
   return (
     <TableOperations>
       <Filter
-        filteredValue="discount"
+        filterField="discount"
         options={[
           {
             label: "All",
@@ -23,8 +23,8 @@ function CabinTableOperations() {
         ]}
       />
 
-      <Select
-        filteredValue="sortBy"
+      <SortBy
+        filterField="sortBy"
         options={[
           {
             label: "Name (A-Z)",
