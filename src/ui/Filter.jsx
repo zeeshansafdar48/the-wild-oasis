@@ -37,7 +37,6 @@ const FilterButton = styled.button`
 `;
 
 function Filter({ filterField, options }) {
-  console.log("==> ~ Filter ~ filterField:", filterField);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentValue = searchParams.get(filterField) || options[0].value;
 
