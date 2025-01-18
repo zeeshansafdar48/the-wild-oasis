@@ -1,7 +1,8 @@
+import { PAGE_SIZE } from "../utils/constants";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
-export async function getBookings(filtering = {}) {
+export async function getBookings(filtering = {}, currentPage = 1) {
   let { filterField, filterValue, filterOperation = "eq" } = filtering;
   let query = supabase
     .from("bookings")
@@ -9,6 +10,12 @@ export async function getBookings(filtering = {}) {
 
   if (filterField) {
     query = query[filterOperation](filterField, filterValue);
+  }
+
+  if (currentPage) {
+    const startIndex = PAGE_SIZE * (currentPage - 1);
+    const stopIndex = PAGE_SIZE * currentPage - 1;
+    query = query.range(startIndex, stopIndex);
   }
 
   const { data, error, count } = await query;

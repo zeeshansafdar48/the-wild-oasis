@@ -65,6 +65,7 @@ function Pagination({ count }) {
 
   const currentPage = Number(searchParams.get("page")) || 1;
   const totalPages = Math.ceil(count / PAGE_SIZE);
+  const isOnLastPage = currentPage >= totalPages;
 
   function handlePrevious() {
     if (!(currentPage <= 1)) {
@@ -74,23 +75,27 @@ function Pagination({ count }) {
   }
 
   function handleNext() {
-    if (!(currentPage >= totalPages)) {
+    if (!isOnLastPage) {
       searchParams.set("page", currentPage + 1);
       setSearchParams(searchParams);
     }
   }
 
+  const startIndex = PAGE_SIZE * (currentPage - 1);
+  const stopIndex = isOnLastPage ? count : PAGE_SIZE * currentPage;
+
   return (
     <StyledPagination>
       <P>
-        Showing <span>1</span> to <span>10</span> of <span>{count}</span> results
+        Showing <span>{startIndex + 1}</span> to <span>{stopIndex}</span> of <span>{count}</span>{" "}
+        results
       </P>
       <Buttons>
         <PaginationButton onClick={handlePrevious} disabled={currentPage <= 1}>
           <HiChevronLeft />
           <span>Previous</span>
         </PaginationButton>
-        <PaginationButton onClick={handleNext} disabled={currentPage >= totalPages}>
+        <PaginationButton onClick={handleNext} disabled={isOnLastPage}>
           <span>Next</span>
           <HiChevronRight />
         </PaginationButton>

@@ -7,6 +7,7 @@ const QUERY_PARAM_FILTER_FIELD = "status";
 export function useBookings() {
   const [searchParams] = useSearchParams();
   const filterValue = searchParams.get(QUERY_PARAM_FILTER_FIELD);
+  const currentPage = Number(searchParams.get("page")) || 1;
 
   // 1. FILTERING
   let filterObj;
@@ -18,12 +19,11 @@ export function useBookings() {
     };
   }
 
-  const {
-    data: { data: bookings, count },
-    isLoading
-  } = useQuery({
-    queryKey: ["bookings", filterObj],
-    queryFn: () => getBookings(filterObj)
+  // 2. PAGINATION
+
+  const { data: { data: bookings, count } = {}, isLoading } = useQuery({
+    queryKey: ["bookings", filterObj, currentPage],
+    queryFn: () => getBookings(filterObj, currentPage)
   });
 
   return { isLoading, bookings, count };
