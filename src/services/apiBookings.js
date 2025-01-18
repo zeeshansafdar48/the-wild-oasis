@@ -3,20 +3,22 @@ import supabase from "./supabase";
 
 export async function getBookings(filtering = {}) {
   let { filterField, filterValue, filterOperation = "eq" } = filtering;
-  let query = supabase.from("bookings").select("*, guests(fullName, email), cabins(name)");
+  let query = supabase
+    .from("bookings")
+    .select("*, guests(fullName, email), cabins(name)", { count: "exact" });
 
   if (filterField) {
     query = query[filterOperation](filterField, filterValue);
   }
 
-  const { data, error } = await query;
+  const { data, error, count } = await query;
 
   if (error) {
     console.log("Bookings could not be loaded");
     throw new Error("Bookings could not be loaded");
   }
 
-  return data;
+  return { data, count };
 }
 
 export async function getBooking(id) {

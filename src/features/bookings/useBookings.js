@@ -18,10 +18,13 @@ export function useBookings() {
     };
   }
 
-  const { data: bookings, isLoading } = useQuery({
+  const {
+    data: { data: bookings, count },
+    isLoading
+  } = useQuery({
     queryKey: ["bookings", filterObj],
     queryFn: () => getBookings(filterObj)
   });
 
-  return { isLoading, bookings };
+  return { isLoading, bookings, count };
 }
